@@ -1,3 +1,7 @@
+#########################Workstation Information##############################
+###Script was written by Daniel J. Song of BAE Systems                     ###
+###Not Intended For Public Use                                             ###
+##############################################################################
 ###Workstation list by either txt file or querying AD
 $WorkstationList= Get-content "path to workstation txt file"
-$WorkstationList= Get-ADcomputer -Filter {Name -Like "xxx" -or Name -Like "xxx"} -Property IPV4address, Operatingsystem, description | Select Name, Description, IPV4address, operatingsystem | Sort Name | export-csv "path to .csv file"
+$WorkstationList= Get-ADcomputer -Filter {Name -Like "xxx" -or Name -Like "xxx"} -Property IPV4address, Operatingsystem, description | Select Name, Description, IPV4address, operatingsystem | Sort Name | export-csv "path to .csv file" -Notypeinformation
