@@ -1,16 +1,21 @@
-#################SYSTEM PATH Editor#########################
-
-#######Path to be Removed
+######################Sytem Path Variable Editor##############################
+###Script was written by Daniel J. Song of BAE Systems                     ###
+###Not Intended For Public Use                                             ###
+###Script modifies the SYSTEM PATH VARIABLE                                ###
+###                                                                        ###
+###                                                                        ###
+##############################################################################
+###Path to be Removed
 $targetdir = "c:\progra~2\java\jre8\bin"
-#######Grabs Current SYSTEM PATH variable and splits by ";"
+###Grabs Current SYSTEM PATH variable and splits by ";"
 $oldpath = [System.Environment]::GetEnvironmentVariable("PATH","machine")
 $oldpathArray = ($oldpath) -split ";"
-#######if any array contains $oldpath, then remove and say "XXX"
+###if any array contains $oldpath, then remove and say "XXX"
 if($oldpathArray -contains "$targetdir"){
 write-host "Removing $targetdir from SYSTEM PATH Variable"
-#######creates newpathArray by joining $oldarray minus $targetdir
+###creates newpathArray by joining $oldarray minus $targetdir
 newpathArray = $oldpathArray | where-object {$_ -ne "$targetdir"}
-#######rejoins each system path variable by ";"
+###rejoins each system path variable by ";"
 $newpath = $newpathArray -join ";"
 [System.Environment]::SetEnvironmentVariable("PATH",$newpath,"machine")
 $env:Path = [System.Environment]::GetEnvironmentVariable("path","machine"), [System.Environment]::GetEnvironmentVariable("path","machine") -join ";"
