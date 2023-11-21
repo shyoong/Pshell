@@ -24,6 +24,7 @@ Start-service "Name of server/$variable"
 echo "$service state is now $Servicestate" | outfile $ServiceMonitorLog -append
 
 ###Automated Email Portion
+$VbCrLf = "`r`n"
 $output = "This event was logged in $servicemonitorlog"
 $From: "Sender Email"
 $To: "Recipient Email"
