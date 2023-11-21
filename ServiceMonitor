@@ -3,7 +3,7 @@
 ###Not Intended For Public Use                                             ###
 ###Script that monitors specified Service                                  ###
 ###Writes to Log, Restarts Service if found stopped                        ###
-###Grab date(julian) in order to distinguish between days                  ###  
+###Grab date(julian) in order to distinguish between days                  ###
 ##############################################################################
 $Jdate=(get-date).dayofyear
 ###Grab Regular date (log files)
