@@ -1,0 +1,14 @@
+#################SYSTEM PATH Editor#########################
+
+#Path to be Removed
+$targetdir = "c:\progra~2\java\jre8\bin"
+#
+$oldpath = [System.Environment]::GetEnvironmentVariable("PATH","machine")
+$oldpathArray = ($oldpath) -split ";"
+if($oldpathArray -contains "$targetdir"){
+write-host "Removing $targetdir from SYSTEM PATH Variable"
+#newpathArray = $oldpathArray | where-object {$_ -ne "$targetdir"}
+$newpath = $newpathArray -join ";"
+[System.Environment]::SetEnvironmentVariable("PATH",$newpath,"machine")
+$env:Path = [System.Environment]::GetEnvironmentVariable("path","machine"), [System.Environment]::GetEnvironmentVariable("path","machine") -join ";"
+}
