@@ -1,1 +1,24 @@
-g
+#########################Service Monitor######################################
+###Script was written by Daniel J. Song of BAE Systems                     ###
+###Not Intended For Public Use                                             ###
+###Ping script for Workstation Network Status                              ###
+##############################################################################
+###Variable List
+$Down = 0
+$VbCrLf = "`r`n"
+
+
+###Imports AD module for powershell
+Import-Module ActiveDirectory
+###Workstation/Server List from either AD query or Text File
+$Workstations = Get-content "path to txt file containing list of workstations"
+$Workstations = Get-ADcomputer -Filter {Name -like "*xxx*" -or Name -Like "*xxx*"} | Select Name | Sort Name
+$Servers = Get-Content "path to txt file containing list of servers"
+$Servers = Get-ADcomputer -Filter {Name -Like "*XXX*" or -Like "*XXX*"} | Select Name | Sort Name
+$Todos = $workstations + $servers
+
+###Loop through each workstation in the list and test-connection
+Foreach($workstation in $workstations){
+
+Test-Connection $computer.name -count 1 -quiet
+
