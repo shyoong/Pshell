@@ -1,1 +1,32 @@
+##########Service Monitor##########
+###Grab date(julian) in order to distinguish between days
+$Jdate=(get-date).dayofyear
+###Grab Regular date (log files)
+$Today= get-date
+###Identify/Assign appropriate service
+$Service = get-service "name of service"
+###Service Monitor Log for TS purposes
+$ServiceMonitorLog = "path to where you want the logfile to be place-$Jdate"
+###Current state of $service
+$ServiceState = (get-service "name of service" -computername "server name").status
+Echo "$service state is currently : $servicestate at $today" | outfile $ServiceMonitorLog -append
+###Queries status of service, if not running, then onto the next step 
+if($servicestate -ne "Running")
+{
+###Starts service "name of service"
+Start-service "Name of server/$variable"
+###Updates $ServiceLog
+echo "$service state is now $Servicestate" | outfile $ServiceMonitorLog -append
 
+###Automated Email Portion
+$output = "This event was logged in $servicemonitorlog"
+$From: "Sender Email"
+$To: "Recipient Email"
+$Subject = "$Service service was found stopped and automatically restarted"
+$SMTPServer = "Exchange server IP"
+$SMTPPort = "usually 25"
+$Header = "Classification: UNCLASSIFIED" + $VbCrLf + "CAVEATS: None" + "TERMS: None" + $VbCrLf + $VbCrLf
+$Footer = $VbCrLf + $VbCrLf + "Classification: UNCLASSIFIED" + $VbCrLf + "CAVEATS: None" + "TERMS: None" + $VbCrLf + $VbCrLf+ $VbCrLf + $VbCrLf
+$Body = $Header + $Footer
+Send-MailMessage -from $From -to $To -subject $subject -body $body -SMTPServer $SMTPServer -port $SMTPPort
+}
